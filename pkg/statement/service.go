@@ -6,9 +6,9 @@ import (
 )
 
 type Service interface {
-	Get(ctx context.Context, filters ...internal.Filter) ([]internal.Document, error)
-	Status(ctx context.Context, id string) (internal.Status, error)
-	Statement(ctx context.Context, id string) (int, error)
-	AddDocument(ctx context.Context, doc *internal.Document) (string, error)
+	Get(ctx context.Context, filters ...internal.Filter) ([]internal.Transaction, error)
+	Status(ctx context.Context, TransactionID string) (internal.Status, error)
+	Statement(ctx context.Context, TransactionID string) (int, error)
+	AddTransaction(ctx context.Context, doc *internal.Transaction) (string, error)
 	ServiceStatus(ctx context.Context) (int, error)
 }
