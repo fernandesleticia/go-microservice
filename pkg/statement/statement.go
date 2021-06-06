@@ -16,15 +16,15 @@ func (w *statementService) Get(_ context.Context, filters ...internal.Filter) ([
 	return []internal.Transaction{transaction}, nil
 }
 
-func (w *statementService) Status(_ context.Context) (internal.Status, error) {
+func (w *statementService) Status(_ context.Context, accountID string) (internal.Status, error) {
 	return internal.InProgress, nil
 }
 
-func (w *statementService) Statement(_ context.Context, account_id string) (int, error) {
+func (w *statementService) Statement(_ context.Context, accountID string) (int, error) {
 	return http.StatusOK, nil
 }
 
-func (w *statementService) AddAccount(_ context.Context) (string, error) {
+func (w *statementService) AddTransaction(_ context.Context, transaction *internal.Transaction) (string, error) {
 	return amount, nil
 }
 
