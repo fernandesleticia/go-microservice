@@ -14,6 +14,18 @@ func (s *Set) Status(ctx context.Context, transactionID string) (internal.Status
 	return stsResp.Status, nil
 }
 
+func (s *Set) ServiceStatus(ctx context.Context) (int, error) {
+	resp, err := s.ServiceStatusEndpoint(ctx, ServiceStatusRequest{})
+	svcStatusResp := resp.(ServiceStatusResponse)
+	if err != nil {
+		return svcStatusResp.Code, err
+	}
+	if svcStatusResp.Err != "" {
+		return svcStatusResp.Code, errors.New(svcStatusResp.Err)
+	}
+	return svcStatusResp.Code, nil
+}
+
 func init() {
 	logger = log.NewLogfmtLogger(log.NewSyncWriter(os.Stderr))
 	logger = log.With(logger, "ts", log.DefaultTimestampUTC)
