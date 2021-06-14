@@ -1,5 +1,13 @@
 package endpoints
 
+type Set struct {
+	GetEndpoint           endpoint.Endpoint
+	AddTransactionEndpoint   endpoint.Endpoint
+	StatusEndpoint        endpoint.Endpoint
+	ServiceStatusEndpoint endpoint.Endpoint
+	StatmentEndpoint     endpoint.Endpoint
+}
+
 var logger log.Logger
 
 func (s *Set) Status(ctx context.Context, transactionID string) (internal.Status, error) {
