@@ -8,6 +8,17 @@ type Set struct {
 	StatmentEndpoint     endpoint.Endpoint
 }
 
+
+func NewEndpointSet(svc statement.Service) Set {
+	return Set{
+		GetEndpoint:           MakeGetEndpoint(svc),
+		AddTransactionEndpoint:   MakeAddTransactionEndpoint(svc),
+		StatusEndpoint:        MakeStatusEndpoint(svc),
+		ServiceStatusEndpoint: MakeServiceStatusEndpoint(svc),
+		StatementEndpoint:     StatementEndpoint(svc),
+	}
+}
+
 var logger log.Logger
 
 func (s *Set) Status(ctx context.Context, transactionID string) (internal.Status, error) {
