@@ -19,6 +19,17 @@ func NewEndpointSet(svc statement.Service) Set {
 	}
 }
 
+func MakeGetEndpoint(svc statement.Service) endpoint.Endpoint {
+	return func(ctx context.Context, request interface{}) (interface{}, error) {
+		req := request.(GetRequest)
+		docs, err := svc.Get(ctx, req.Filters...)
+		if err != nil {
+			return GetResponse{docs, err.Error()}, nil
+		}
+		return GetResponse{docs, ""}, nil
+	}
+}
+
 var logger log.Logger
 
 func (s *Set) Status(ctx context.Context, transactionID string) (internal.Status, error) {
